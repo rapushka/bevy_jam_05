@@ -3,6 +3,7 @@
 use bevy::prelude::*;
 use bevy_jam_05::GamePlugin;
 
+
 fn main() {
     App::new().add_plugins(GamePlugin).run();
 }
