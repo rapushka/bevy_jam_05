@@ -1,0 +1,3 @@
+[submodule "src/submodules/bevy_third_person_camera"]
+	path = src/submodules/bevy_third_person_camera
+	url = git@github.com:rapushka/bevy_third_person_camera.git
