@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use super::create;
+use super::{common, create};
 
 #[derive(Component)]
 struct PlayButton;
@@ -27,7 +27,8 @@ fn spawn_main_menu(
 ) {
     commands.spawn(Name::new("main menu"))
         .insert(NodeBundle {
-            style: super::common::styles::main_menu(),
+            style: common::styles::main_menu(),
+            z_index: common::z_index::MAIN_MENU,
             ..default()
         })
         .with_children(|parent| {
