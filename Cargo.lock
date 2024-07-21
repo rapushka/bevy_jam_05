@@ -1051,6 +1051,7 @@ dependencies = [
 [[package]]
 name = "bevy_third_person_camera"
 version = "0.1.11"
+source = "git+https://github.com/rapushka/bevy_third_person_camera.git#6faa1a45c65718152d770a725c9052e8784b06d4"
 dependencies = [
  "bevy",
 ]
