@@ -1,6 +1,7 @@
-use crate::prelude::*;
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
+
+use crate::prelude::*;
 
 pub struct AssetLoadingPlugin;
 
@@ -18,6 +19,9 @@ impl Plugin for AssetLoadingPlugin {
 
 #[derive(AssetCollection, Resource)]
 pub struct GameAssets {
-    #[asset(path = "models/Robot.gltf#Scene0")]
+    #[asset(path = "player/Robot.gltf#Scene0")]
     pub player_model: Handle<Scene>,
+
+    #[asset(path = "player/crosshair.png")]
+    pub crosshair: Handle<Image>,
 }

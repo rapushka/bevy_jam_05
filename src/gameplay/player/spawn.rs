@@ -1,4 +1,3 @@
-use bevy_third_person_camera::*;
 use crate::gameplay::movement::*;
 use crate::prelude::*;
 use super::Player;
@@ -10,7 +9,6 @@ pub fn spawn_player(
     commands.spawn(Player)
         .insert(Name::new("player"))
         .insert(StateScoped(InGameplay))
-        .insert(ThirdPersonCameraTarget)
         .insert(MovementState::Grounded)
         .insert(MovementSpeed(constants::player::MOVEMENT_SPEED))
         .insert(JumpForce(constants::player::JUMP_FORCE))

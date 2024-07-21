@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 use bevy::window::{CursorGrabMode, PrimaryWindow};
-use bevy_third_person_camera::*;
 
 use crate::prelude::*;
 
@@ -9,14 +8,13 @@ pub struct CameraPlugin;
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_plugins(ThirdPersonCameraPlugin)
-
             .add_systems(OnEnter(AppState::Bootstrap), spawn_camera)
 
-            .add_systems(OnEnter(AppState::Gameplay { paused: true }), unlock_camera)
-            .add_systems(OnEnter(AppState::Gameplay { paused: false }), lock_camera)
+        // TODO: lock cursor?
+        // .add_systems(OnEnter(AppState::Gameplay { paused: true }), unlock_camera)
+        // .add_systems(OnEnter(AppState::Gameplay { paused: false }), lock_camera)
 
-            .add_systems(OnExit(InGameplay), unlock_camera)
+        // .add_systems(OnExit(InGameplay), unlock_camera)
         ;
     }
 }
@@ -24,50 +22,11 @@ impl Plugin for CameraPlugin {
 fn spawn_camera(
     mut commands: Commands,
 ) {
-    commands.spawn((
-        ThirdPersonCamera {
-            cursor_lock_toggle_enabled: false,
-            cursor_lock_active: false,
-            sensitivity: Vec2::new(5.0, 5.0),
-            zoom: Zoom::new(10.0, 20.0),
-            offset_enabled: true,
-            offset: Offset::new(2.0, 2.5),
-            aim_enabled: true,
-            ..default()
-        },
-        Camera3dBundle {
+    commands.spawn("camera".as_name())
+        .insert(Camera2dBundle {
             transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
             ..default()
-        },
-        IsDefaultUiCamera,
-    ));
-}
-
-fn lock_camera(
-    windows: Query<&mut Window, With<PrimaryWindow>>,
-    cameras: Query<&mut ThirdPersonCamera>,
-) {
-    set_camera_locked(cameras, windows, true);
-}
-
-fn unlock_camera(
-    cameras: Query<&mut ThirdPersonCamera>,
-    windows: Query<&mut Window, With<PrimaryWindow>>,
-) {
-    set_camera_locked(cameras, windows, false);
-}
-
-fn set_camera_locked(
-    mut cameras: Query<&mut ThirdPersonCamera>,
-    mut windows: Query<&mut Window, With<PrimaryWindow>>,
-    value: bool,
-) {
-    for mut camera in cameras.iter_mut() {
-        camera.active = value;
-        camera.cursor_lock_active = value;
-
-        let mut window = windows.get_single_mut().unwrap();
-        window.cursor.visible = !value;
-        window.cursor.grab_mode = if value { CursorGrabMode::Locked } else { CursorGrabMode::None };
-    }
+        })
+        .insert(IsDefaultUiCamera)
+    ;
 }
