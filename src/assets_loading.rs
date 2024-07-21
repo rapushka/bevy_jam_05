@@ -19,9 +19,10 @@ impl Plugin for AssetLoadingPlugin {
 
 #[derive(AssetCollection, Resource)]
 pub struct GameAssets {
-    #[asset(path = "player/Robot.gltf#Scene0")]
-    pub player_model: Handle<Scene>,
-
     #[asset(path = "player/crosshair.png")]
     pub crosshair: Handle<Image>,
+
+    #[asset(texture_atlas(tile_size_x = 32, tile_size_y = 32, columns = 8, rows = 1))]
+    #[asset(path = "player/player_tmp.png")]
+    pub player: Handle<Image>,
 }

@@ -4,7 +4,6 @@ use crate::custom_default_plugin::*;
 use crate::debug::DebugPlugin;
 use crate::gameplay::GameplayPlugin;
 use crate::input::InputPlugin;
-use crate::physics::PhysicsPlugin;
 use crate::ui::UiPlugin;
 
 mod debug;
@@ -17,7 +16,6 @@ mod common;
 mod camera;
 mod gameplay;
 pub mod input;
-pub mod physics;
 
 pub struct GamePlugin;
 
@@ -32,13 +30,13 @@ impl Plugin for GamePlugin {
 
             // # Mine
             .add_plugins((
+                #[cfg(debug_assertions)]
                 DebugPlugin,
                 InfrastructurePlugin,
                 UiPlugin,
                 CameraPlugin,
                 GameplayPlugin,
                 InputPlugin,
-                PhysicsPlugin,
             ))
         ;
     }

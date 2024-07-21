@@ -1,6 +1,3 @@
-use bevy::prelude::*;
-use bevy::window::{CursorGrabMode, PrimaryWindow};
-
 use crate::prelude::*;
 
 pub struct CameraPlugin;
@@ -23,10 +20,7 @@ fn spawn_camera(
     mut commands: Commands,
 ) {
     commands.spawn("camera".as_name())
-        .insert(Camera2dBundle {
-            transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-            ..default()
-        })
+        .insert(Camera2dBundle::default())
         .insert(IsDefaultUiCamera)
     ;
 }

@@ -9,10 +9,7 @@ pub fn spawn_player(
     commands.spawn(Player)
         .insert(Name::new("player"))
         .insert(StateScoped(InGameplay))
-        .insert(MovementState::Grounded)
         .insert(MovementSpeed(constants::player::MOVEMENT_SPEED))
-        .insert(JumpForce(constants::player::JUMP_FORCE))
-        .insert(utils::load_scene(&assets.player_model))
-        .insert(physics::PlayerBundle::default())
+        .insert(utils::load_image(&assets.player))
     ;
 }
