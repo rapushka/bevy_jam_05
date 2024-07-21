@@ -9,6 +9,8 @@ pub struct CameraPlugin;
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app
+            .add_plugins(ThirdPersonCameraPlugin)
+            
             .add_systems(OnEnter(AppState::Bootstrap), spawn_camera)
 
             .add_systems(OnEnter(AppState::Gameplay { paused: true }), unlock_camera)
@@ -61,7 +63,7 @@ fn set_camera_locked(
     value: bool,
 ) {
     for mut camera in cameras.iter_mut() {
-        camera.active = !value;
+        camera.active = value;
         camera.cursor_lock_active = value;
 
         let mut window = windows.get_single_mut().unwrap();
