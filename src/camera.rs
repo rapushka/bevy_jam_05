@@ -10,7 +10,7 @@ impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app
             .add_plugins(ThirdPersonCameraPlugin)
-            
+
             .add_systems(OnEnter(AppState::Bootstrap), spawn_camera)
 
             .add_systems(OnEnter(AppState::Gameplay { paused: true }), unlock_camera)
@@ -29,9 +29,9 @@ fn spawn_camera(
             cursor_lock_toggle_enabled: false,
             cursor_lock_active: false,
             sensitivity: Vec2::new(5.0, 5.0),
-            zoom: Zoom::new(3.0, 10.0),
+            zoom: Zoom::new(10.0, 20.0),
             offset_enabled: true,
-            offset: Offset::new(0.0, 1.0),
+            offset: Offset::new(0.0, 5.0),
             aim_enabled: true,
             ..default()
         },

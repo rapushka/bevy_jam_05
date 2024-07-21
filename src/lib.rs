@@ -4,6 +4,7 @@ use crate::custom_default_plugin::*;
 use crate::debug::DebugPlugin;
 use crate::gameplay::GameplayPlugin;
 use crate::input::InputPlugin;
+use crate::physics::PhysicsPlugin;
 use crate::ui::UiPlugin;
 
 mod debug;
@@ -16,6 +17,7 @@ mod common;
 mod camera;
 mod gameplay;
 pub mod input;
+pub mod physics;
 
 pub struct GamePlugin;
 
@@ -26,10 +28,6 @@ impl Plugin for GamePlugin {
             .add_plugins((
                 DefaultPluginWithCustoms,
                 AssetLoadingPlugin,
-    
-                RapierPhysicsPlugin::<NoUserData>::default(),
-                #[cfg(debug_assertions)]
-                RapierDebugRenderPlugin::default(),
             ))
 
             // # Mine
@@ -40,6 +38,7 @@ impl Plugin for GamePlugin {
                 CameraPlugin,
                 GameplayPlugin,
                 InputPlugin,
+                PhysicsPlugin,
             ))
         ;
     }

@@ -1,6 +1,7 @@
 use crate::prelude::*;
 
 pub mod constants;
+pub mod utils;
 
 #[derive(Event)]
 pub struct Clicked;
