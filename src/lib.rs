@@ -26,6 +26,10 @@ impl Plugin for GamePlugin {
             .add_plugins((
                 DefaultPluginWithCustoms,
                 AssetLoadingPlugin,
+    
+                RapierPhysicsPlugin::<NoUserData>::default(),
+                #[cfg(debug_assertions)]
+                RapierDebugRenderPlugin::default(),
             ))
 
             // # Mine
