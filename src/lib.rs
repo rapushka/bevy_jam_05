@@ -1,6 +1,7 @@
 use prelude::*;
 use crate::camera::CameraPlugin;
 use crate::custom_default_plugin::*;
+use crate::gameplay::GameplayPlugin;
 use crate::ui::UiPlugin;
 
 mod assets_loading;
@@ -10,6 +11,7 @@ mod infrastructure;
 mod ui;
 mod common;
 mod camera;
+mod gameplay;
 
 pub struct GamePlugin;
 
@@ -27,6 +29,7 @@ impl Plugin for GamePlugin {
                 InfrastructurePlugin,
                 UiPlugin,
                 CameraPlugin,
+                GameplayPlugin,
             ))
         ;
     }

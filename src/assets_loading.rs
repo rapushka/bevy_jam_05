@@ -9,7 +9,7 @@ impl Plugin for AssetLoadingPlugin {
         app
             .add_loading_state(
                 LoadingState::new(AppState::Bootstrap)
-                    .load_collection::<Assets>()
+                    .load_collection::<GameAssets>()
                     .continue_to_state(AppState::MainMenu)
             )
         ;
@@ -17,7 +17,7 @@ impl Plugin for AssetLoadingPlugin {
 }
 
 #[derive(AssetCollection, Resource)]
-struct Assets {
+pub struct GameAssets {
     #[asset(path = "models/Robot.gltf#Scene0")]
-    player_model: Handle<Scene>,
+    pub player_model: Handle<Scene>,
 }
