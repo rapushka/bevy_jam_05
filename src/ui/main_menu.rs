@@ -13,10 +13,8 @@ impl Plugin for MainMenuPlugin {
         app
             .add_systems(OnEnter(AppState::MainMenu), spawn_main_menu)
 
-            .add_systems(Update, (
-                on_play_button_clicked,
-                on_quit_button_clicked,
-            ).run_if(in_state(InGameplay)))
+            .observe(on_play_button_clicked)
+            .observe(on_quit_button_clicked)
         ;
     }
 }
@@ -26,6 +24,7 @@ fn spawn_main_menu(
     asset_server: Res<AssetServer>,
 ) {
     commands.spawn(Name::new("main menu"))
+        .insert(StateScoped(AppState::MainMenu))
         .insert(NodeBundle {
             style: common::styles::main_menu(),
             z_index: common::z_index::MAIN_MENU,
@@ -39,5 +38,23 @@ fn spawn_main_menu(
     ;
 }
 
-fn on_play_button_clicked() {}
-fn on_quit_button_clicked() {}
+fn on_play_button_clicked(
+    trigger: Trigger<Clicked>,
+    play_buttons: Query<Entity, With<PlayButton>>,
+    mut next_state: ResMut<NextState<AppState>>,
+) {
+    let is_play_button = play_buttons.contains(trigger.entity());
+    if is_play_button {
+        next_state.set(AppState::Gameplay { paused: false });
+    }
+}
+fn on_quit_button_clicked(
+    trigger: Trigger<Clicked>,
+    quit_buttons: Query<Entity, With<QuitButton>>,
+    mut app_exit_event: EventWriter<AppExit>,
+) {
+    let is_quit_button = quit_buttons.contains(trigger.entity());
+    if is_quit_button {
+        app_exit_event.send(AppExit::Success);
+    }
+}
