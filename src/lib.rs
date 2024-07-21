@@ -3,6 +3,7 @@ use crate::camera::CameraPlugin;
 use crate::custom_default_plugin::*;
 use crate::debug::DebugPlugin;
 use crate::gameplay::GameplayPlugin;
+use crate::input::InputPlugin;
 use crate::ui::UiPlugin;
 
 mod debug;
@@ -14,6 +15,7 @@ mod ui;
 mod common;
 mod camera;
 mod gameplay;
+pub mod input;
 
 pub struct GamePlugin;
 
@@ -33,6 +35,7 @@ impl Plugin for GamePlugin {
                 UiPlugin,
                 CameraPlugin,
                 GameplayPlugin,
+                InputPlugin,
             ))
         ;
     }

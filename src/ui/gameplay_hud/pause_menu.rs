@@ -15,10 +15,15 @@ pub struct PauseMenuPlugin;
 impl Plugin for PauseMenuPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_systems(OnEnter(InGameplay), spawn_pause_menu)
+            .add_systems(OnEnter(InGameplay), (
+                spawn_pause_menu,
+                hide_pause_menu,
+            ).chain())
+
             .add_systems(OnEnter(AppState::Gameplay { paused: true }), show_pause_menu)
             .add_systems(OnEnter(AppState::Gameplay { paused: false }), hide_pause_menu)
 
+            .observe(toggle_pause_menu_visibility)
             .observe(on_continue_button_clicked)
             .observe(on_back_button_clicked)
         ;
@@ -30,6 +35,7 @@ fn spawn_pause_menu(
     asset_server: Res<AssetServer>,
 ) {
     commands.spawn(Name::new("pause menu"))
+        .insert(PauseMenu)
         .insert(StateScoped(InGameplay))
         .insert(NodeBundle {
             style: common::styles::main_menu(),
@@ -44,19 +50,44 @@ fn spawn_pause_menu(
     ;
 }
 
-fn show_pause_menu(
+fn toggle_pause_menu_visibility(
+    _trigger: Trigger<input::PauseGame>,
     mut pause_menus: Query<&mut Visibility, With<PauseMenu>>,
 ) {
     for mut visibility in pause_menus.iter_mut() {
-        *visibility = Visibility::Inherited;
+        let was_visible = match *visibility {
+            Visibility::Inherited => true,
+            Visibility::Hidden => false,
+            Visibility::Visible => true,
+        };
+
+        *visibility = as_visibility(!was_visible);
     }
 }
-fn hide_pause_menu(
-    mut pause_menus: Query<&mut Visibility, With<PauseMenu>>,
+
+fn show_pause_menu(
+    pause_menus: Query<&mut Visibility, With<PauseMenu>>,
 ) {
+    set_pause_menu_visible(pause_menus, true);
+}
+fn hide_pause_menu(
+    pause_menus: Query<&mut Visibility, With<PauseMenu>>,
+) {
+    set_pause_menu_visible(pause_menus, false);
+}
+
+fn set_pause_menu_visible(
+    mut pause_menus: Query<&mut Visibility, With<PauseMenu>>,
+    value: bool,
+) {
+    dbg!(value);
     for mut visibility in pause_menus.iter_mut() {
-        *visibility = Visibility::Hidden;
+        *visibility = as_visibility(value);
     }
+}
+
+fn as_visibility(value: bool) -> Visibility {
+    if value { Visibility::Inherited } else { Visibility::Hidden }
 }
 
 fn on_continue_button_clicked(
