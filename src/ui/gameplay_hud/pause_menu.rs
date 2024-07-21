@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use crate::prelude::AppState::MainMenu;
 use crate::ui::{common, create};
 
 #[derive(Component)]
@@ -15,7 +16,7 @@ pub struct PauseMenuPlugin;
 impl Plugin for PauseMenuPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_systems(OnEnter(InGameplay), (
+            .add_systems(OnEnter(MainMenu), (
                 spawn_pause_menu,
                 hide_pause_menu,
             ).chain())
@@ -37,7 +38,6 @@ fn spawn_pause_menu(
 ) {
     commands.spawn(Name::new("pause menu"))
         .insert(PauseMenu)
-        .insert(StateScoped(InGameplay))
         .insert(NodeBundle {
             style: common::styles::main_menu(),
             z_index: common::z_index::PAUSE_MENU,
