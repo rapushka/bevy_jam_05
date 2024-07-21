@@ -25,3 +25,6 @@ bevy_third_person_camera = { version = "0.1.11", path = "src/submodules/bevy_thi
 
 [workspace]
 resolver = "2"
+members = [
+    "src/submodules/bevy_third_person_camera",
+]
