@@ -11,10 +11,8 @@ impl Plugin for CameraPlugin {
         app
             .add_systems(OnEnter(AppState::Bootstrap), spawn_camera)
 
-            .add_systems(OnEnter(InGameplay), lock_camera)
-
-            .add_systems(OnEnter(AppState::Gameplay { paused: true }), lock_camera)
-            .add_systems(OnExit(AppState::Gameplay { paused: false }), unlock_camera)
+            .add_systems(OnEnter(AppState::Gameplay { paused: true }), unlock_camera)
+            .add_systems(OnEnter(AppState::Gameplay { paused: false }), lock_camera)
 
             .add_systems(OnExit(InGameplay), unlock_camera)
         ;

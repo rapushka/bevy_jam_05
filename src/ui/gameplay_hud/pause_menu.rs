@@ -24,6 +24,7 @@ impl Plugin for PauseMenuPlugin {
             .add_systems(OnEnter(AppState::Gameplay { paused: false }), hide_pause_menu)
 
             .observe(toggle_pause_menu_visibility)
+
             .observe(on_continue_button_clicked)
             .observe(on_back_button_clicked)
         ;
@@ -52,16 +53,14 @@ fn spawn_pause_menu(
 
 fn toggle_pause_menu_visibility(
     _trigger: Trigger<input::PauseGame>,
-    mut pause_menus: Query<&mut Visibility, With<PauseMenu>>,
+    prev_state: Res<State<AppState>>,
+    mut next_state: ResMut<NextState<AppState>>,
 ) {
-    for mut visibility in pause_menus.iter_mut() {
-        let was_visible = match *visibility {
-            Visibility::Inherited => true,
-            Visibility::Hidden => false,
-            Visibility::Visible => true,
-        };
-
-        *visibility = as_visibility(!was_visible);
+    let prev_state = prev_state.get().clone();
+    if let AppState::Gameplay { paused } = prev_state {
+        next_state.set(AppState::Gameplay { paused: !paused });
+    } else {
+        panic!("this system should be called only in gameplay state");
     }
 }
 
