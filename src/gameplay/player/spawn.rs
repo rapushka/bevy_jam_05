@@ -7,17 +7,18 @@ pub fn spawn_player(
     mut commands: Commands,
     assets: Res<GameAssets>,
 ) {
-    commands.spawn_empty()
-        .insert(Player)
+    println!("player spawned");
+    
+    commands.spawn(Player)
+        .insert(Name::new("player"))
+        .insert(StateScoped(InGameplay))
         .insert(ThirdPersonCameraTarget)
         .insert(MovementState::Grounded)
         .insert(MovementSpeed(constants::PLAYER_MOVEMENT_SPEED))
         .insert(JumpForce(constants::JUMP_FORCE))
-        .insert(Name::new("player"))
-        .insert(StateScoped(InGameplay))
         .insert(SceneBundle {
             scene: assets.player_model.clone(),
-            transform: Transform::from_xyz(0.0, 0.0, 0.0),
+            transform: Transform::from_xyz(-1.0, 0.0, 0.0),
             ..default()
         })
     // .insert(LockedAxes::ROTATION_LOCKED)

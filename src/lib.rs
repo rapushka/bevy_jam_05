@@ -31,7 +31,17 @@ impl Plugin for GamePlugin {
                 CameraPlugin,
                 GameplayPlugin,
             ))
+
+            .add_systems(OnEnter(InGameplay), || { println!("in gameplay") })
+            .add_systems(Update, log_state_transition.run_if(on_event::<StateTransitionEvent<AppState>>()))
         ;
     }
 }
 
+fn log_state_transition(
+    mut event: EventReader<StateTransitionEvent<AppState>>,
+) {
+    for event in event.read() {
+        dbg!(event);
+    }
+}

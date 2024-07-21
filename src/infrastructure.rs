@@ -10,6 +10,7 @@ impl Plugin for InfrastructurePlugin {
         app
             .enable_state_scoped_entities::<AppState>()
             .init_state::<AppState>()
+            .add_computed_state::<InGameplay>()
         ;
     }
 }
