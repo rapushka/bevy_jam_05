@@ -1,7 +1,7 @@
 use crate::gameplay::game_loop::GameLoopPlugin;
 use crate::prelude::*;
 
-mod player;
+pub mod player;
 mod game_loop;
 pub mod movement;
 

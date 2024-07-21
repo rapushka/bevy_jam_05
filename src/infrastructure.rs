@@ -9,6 +9,7 @@ impl Plugin for InfrastructurePlugin {
     fn build(&self, app: &mut App) {
         app
             .enable_state_scoped_entities::<AppState>()
+            .enable_state_scoped_entities::<InGameplay>()
             .init_state::<AppState>()
             .add_computed_state::<InGameplay>()
         ;

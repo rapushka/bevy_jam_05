@@ -1,3 +1,4 @@
+use crate::gameplay::player::Player;
 use crate::prelude::*;
 
 type AppStateTransition = StateTransitionEvent<AppState>;
@@ -8,7 +9,6 @@ impl Plugin for DebugPlugin {
     fn build(&self, app: &mut App) {
         app
             .add_systems(Update, log_state_transition.run_if(on_event::<AppStateTransition>()))
-
         ;
     }
 }

@@ -7,8 +7,6 @@ pub fn spawn_player(
     mut commands: Commands,
     assets: Res<GameAssets>,
 ) {
-    println!("player spawned");
-    
     commands.spawn(Player)
         .insert(Name::new("player"))
         .insert(StateScoped(InGameplay))
