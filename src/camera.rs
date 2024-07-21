@@ -32,6 +32,7 @@ fn spawn_camera(
             zoom: Zoom::new(3.0, 10.0),
             offset_enabled: true,
             offset: Offset::new(0.0, 1.0),
+            aim_enabled: true,
             ..default()
         },
         Camera3dBundle {
