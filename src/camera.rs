@@ -31,7 +31,7 @@ fn spawn_camera(
             sensitivity: Vec2::new(5.0, 5.0),
             zoom: Zoom::new(10.0, 20.0),
             offset_enabled: true,
-            offset: Offset::new(0.0, 5.0),
+            offset: Offset::new(2.0, 2.5),
             aim_enabled: true,
             ..default()
         },

@@ -1,7 +1,7 @@
+pub mod player {
+    pub const MOVEMENT_SPEED: f32 = 3.0;
+    pub const JUMP_FORCE: f32 = 150.0;
 
-pub const PLAYER_MOVEMENT_SPEED: f32 = 3.0;
-pub const PLAYER_MASS: f32 = 12.5;
-pub const GRAVITY_SCALE: f32 = 3.0;
-pub const JUMP_FORCE: f32 = 150.0;
-
-pub const MOVE_TO_SPEED: f32 = 12.0; 
+    pub const COLLIDER_HEIGHT: f32 = 2.5;
+    pub const COLLIDER_RADIUS: f32 = 1.5;
+}

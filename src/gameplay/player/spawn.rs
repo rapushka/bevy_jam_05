@@ -12,8 +12,8 @@ pub fn spawn_player(
         .insert(StateScoped(InGameplay))
         .insert(ThirdPersonCameraTarget)
         .insert(MovementState::Grounded)
-        .insert(MovementSpeed(constants::PLAYER_MOVEMENT_SPEED))
-        .insert(JumpForce(constants::JUMP_FORCE))
+        .insert(MovementSpeed(constants::player::MOVEMENT_SPEED))
+        .insert(JumpForce(constants::player::JUMP_FORCE))
         .insert(utils::load_scene(&assets.player_model))
         .insert(physics::PlayerBundle::default())
     ;
