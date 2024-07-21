@@ -1,9 +1,11 @@
 use prelude::*;
 use crate::camera::CameraPlugin;
 use crate::custom_default_plugin::*;
+use crate::debug::DebugPlugin;
 use crate::gameplay::GameplayPlugin;
 use crate::ui::UiPlugin;
 
+mod debug;
 mod assets_loading;
 mod prelude;
 mod custom_default_plugin;
@@ -26,22 +28,12 @@ impl Plugin for GamePlugin {
 
             // # Mine
             .add_plugins((
+                DebugPlugin,
                 InfrastructurePlugin,
                 UiPlugin,
                 CameraPlugin,
                 GameplayPlugin,
             ))
-
-            .add_systems(OnEnter(InGameplay), || { println!("in gameplay") })
-            .add_systems(Update, log_state_transition.run_if(on_event::<StateTransitionEvent<AppState>>()))
         ;
-    }
-}
-
-fn log_state_transition(
-    mut event: EventReader<StateTransitionEvent<AppState>>,
-) {
-    for event in event.read() {
-        dbg!(event);
     }
 }
