@@ -749,6 +749,7 @@ dependencies = [
  "bevy_asset_loader",
  "bevy_gltf_components",
  "bevy_registry_export",
+ "bevy_third_person_camera",
 ]
 
 [[package]]
@@ -1045,6 +1046,13 @@ dependencies = [
  "glyph_brush_layout",
  "serde",
  "thiserror",
+]
+
+[[package]]
+name = "bevy_third_person_camera"
+version = "0.1.11"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]

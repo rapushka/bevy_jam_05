@@ -1,4 +1,4 @@
-use crate::prelude::{ComputedStates, States};
+use crate::prelude::{ComputedStates, Res, State, States};
 
 #[derive(States, Clone, PartialEq, Eq, Hash, Debug, Default)]
 pub enum AppState {
@@ -11,7 +11,7 @@ pub enum AppState {
 }
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]
-struct InGameplay;
+pub struct InGameplay;
 
 impl ComputedStates for InGameplay {
     type SourceStates = AppState;
