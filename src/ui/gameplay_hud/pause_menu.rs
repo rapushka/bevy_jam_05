@@ -79,7 +79,6 @@ fn set_pause_menu_visible(
     mut pause_menus: Query<&mut Visibility, With<PauseMenu>>,
     value: bool,
 ) {
-    dbg!(value);
     for mut visibility in pause_menus.iter_mut() {
         *visibility = as_visibility(value);
     }
