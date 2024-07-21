@@ -1,11 +1,13 @@
 use prelude::*;
 
 use crate::custom_default_plugin::*;
+use crate::ui::UiPlugin;
 
 mod assets_loading;
 mod prelude;
 mod custom_default_plugin;
 mod infrastructure;
+mod ui;
 
 pub struct GamePlugin;
 
@@ -21,6 +23,7 @@ impl Plugin for GamePlugin {
             // # Mine
             .add_plugins((
                 InfrastructurePlugin,
+                UiPlugin,
             ))
         ;
     }
