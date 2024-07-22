@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 #[derive(Component)]
 pub struct MovementSpeed(pub f32);
-#[derive(Component)]
+#[derive(Component, Reflect)]
 pub struct MovementDirection(pub Vec2);
 
 pub(super) fn move_entities(
