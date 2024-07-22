@@ -34,6 +34,7 @@ impl Plugin for GamePlugin {
                 #[cfg(debug_assertions)]
                 DebugPlugin,
                 InfrastructurePlugin,
+                CommonPlugin,
                 UiPlugin,
                 CameraPlugin,
                 GameplayPlugin,
