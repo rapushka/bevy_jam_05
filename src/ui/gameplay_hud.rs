@@ -21,7 +21,7 @@ fn create_gameplay_hud(
 ) {
     let name = "crosshair";
     commands.spawn(to_name(name))
-        .insert(utils::load_image(&assets.crosshair))
+        .insert(utils::load_sprite_atlas(&assets.crosshair))
     ;
     println!("spawned crosshair");
 }

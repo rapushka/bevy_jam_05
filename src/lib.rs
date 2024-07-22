@@ -16,6 +16,7 @@ mod common;
 mod camera;
 mod gameplay;
 pub mod input;
+mod animations;
 
 pub struct GamePlugin;
 
