@@ -1,4 +1,5 @@
 use crate::gameplay::movement::*;
+use crate::input::InputReceiver;
 use crate::prelude::*;
 use super::Player;
 
@@ -15,5 +16,7 @@ pub fn spawn_player(
         .insert(MovementSpeed(constants::player::MOVEMENT_SPEED))
         .insert(utils::load_sprite_atlas(&assets.player))
         .insert(transform)
+        .insert(InputReceiver)
+        .insert(MovementDirection(Vec2::ZERO))
     ;
 }
